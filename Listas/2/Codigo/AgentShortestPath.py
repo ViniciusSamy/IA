@@ -1,7 +1,7 @@
 from Envoriment import Enviroment
 from copy import deepcopy
 
-class AgentGreedy:
+class AgentShortestPath:
 
     def __init__(self,env):
         self.env = env
@@ -65,7 +65,7 @@ if __name__ == "__main__":
     env = Enviroment(height, width, n_obstacles)
     
     #
-    agent = AgentGreedy(env)
+    agent = AgentShortestPath(env)
     finded, path = agent.act()
 
     #Printing Field
