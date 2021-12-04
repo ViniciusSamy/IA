@@ -4,7 +4,7 @@ from math import exp
 from random import random
 from copy import deepcopy
 
-def SimulatedAnnealing(problem, neighborhood, T, T_min, cooling_factor):
+def SimulatedAnnealing(problem, neighborhood, T, T_min, cooling_factor, itr_max):
 
     #Current solution
     s = problem.random_solution()
@@ -13,7 +13,8 @@ def SimulatedAnnealing(problem, neighborhood, T, T_min, cooling_factor):
     s_star = deepcopy(s)
 
     #Search
-    while T > T_min:
+    i = 0
+    while T > T_min or i == itr_max:
        
         #Apply neighborhoods
         for N in neighborhood():
@@ -57,6 +58,9 @@ def SimulatedAnnealing(problem, neighborhood, T, T_min, cooling_factor):
         
         #Cooling
         T = T - T*cooling_factor
+
+        #Count itr
+        i += 1
             
 
     #Return best solution finded
@@ -72,8 +76,10 @@ if __name__ == "__main__":
     cooling_factor = 0.01
     problem = QueensProblem(num_queens)
     neigh = neighborhood
+    itr_max = 100
 
-    s = SimulatedAnnealing(problem, neigh, T, T_min, cooling_factor)
+    s = SimulatedAnnealing(problem, neigh, T, T_min, cooling_factor, itr_max)
+
 
 
     problem.plot(s)
